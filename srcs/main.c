@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:36:33 by blee              #+#    #+#             */
-/*   Updated: 2019/01/18 17:22:59 by blee             ###   ########.fr       */
+/*   Updated: 2019/02/12 17:59:51 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ char	*get_input(void)
 
 int		main(void)
 {
-	char	*str;
+	char		*str;
+	extern char	**environ;
 
+	ft_printf(environ[0]);
 	while(1)
 	{
 		ft_putstr("$>");
