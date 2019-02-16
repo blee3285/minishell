@@ -6,10 +6,12 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:29:12 by blee              #+#    #+#             */
-/*   Updated: 2019/01/23 15:29:50 by blee             ###   ########.fr       */
+/*   Updated: 2019/02/15 18:25:19 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	read_input()
+int		read_input(char *str)
+{
+}
