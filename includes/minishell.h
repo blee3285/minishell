@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:37:31 by blee              #+#    #+#             */
-/*   Updated: 2019/02/15 14:52:21 by blee             ###   ########.fr       */
+/*   Updated: 2019/02/16 15:16:53 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@
 
 typedef struct			s_env
 {
-	char	*str;
-	t_env	*next;
+	char			*str;
+	struct s_env	*next;
 }						t_env;
 
-typedef struct		
+typedef struct			s_cmds
+{
+	char	*name;
+	void	*ptr;
+}						t_cmds;
 
 #endif

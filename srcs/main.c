@@ -6,11 +6,41 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:36:33 by blee              #+#    #+#             */
-/*   Updated: 2019/02/12 17:59:51 by blee             ###   ########.fr       */
+/*   Updated: 2019/02/16 15:22:41 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_env	*new_env(char *str)
+{
+	t_env	*new;
+
+	new = (t_env*)malloc(sizeof(t_env));
+	new->str = ft_strdup(str);
+	new->next = NULL;
+	return (new);
+}
+
+t_env	*init_env(char **environ)
+{
+	int		i;
+	t_env	*env;
+	t_env	*out;
+
+	i = 1;
+	if (!environ)
+		return (NULL);
+	env = new_env(environ[0]);
+	out = env;
+	while (environ[i])
+	{
+		env->next = new_env(environ[i]);
+		env = env->next;
+		i++;
+	}
+	return (out);
+}
 
 char	*get_input(void)
 {
@@ -38,8 +68,14 @@ int		main(void)
 {
 	char		*str;
 	extern char	**environ;
+	t_env		*env;
 
-	ft_printf(environ[0]);
+	env = init_env(environ);
+	while (env)
+	{
+		ft_printf("%s\n", env->str);
+		env = env->next;
+	}
 	while(1)
 	{
 		ft_putstr("$>");

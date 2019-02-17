@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.c                                       :+:      :+:    :+:   */
+/*   msh_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/23 15:29:12 by blee              #+#    #+#             */
-/*   Updated: 2019/02/16 15:17:46 by blee             ###   ########.fr       */
+/*   Created: 2019/02/16 15:25:25 by blee              #+#    #+#             */
+/*   Updated: 2019/02/16 16:20:37 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		read_input(char *str)
+int		cmd_id(char *str)
 {
+	int		i;
 
+	i = 0;
+}
+
+t_cmds	*init_cmds(void)
+{
+	t_cmds	*cmd_arr;
+
+	cmd_arr = (t_cmds*)malloc(sizeof(t_cmds) * )
 }
