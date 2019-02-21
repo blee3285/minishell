@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:36:33 by blee              #+#    #+#             */
-/*   Updated: 2019/02/16 15:22:41 by blee             ###   ########.fr       */
+/*   Updated: 2019/02/20 18:51:33 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,24 @@ char	*get_input(void)
 	return (str);
 }
 
+void	temp_ls(char *input)
+{
+	char	**av;
+	t_param	*param;
+	int		i;
+
+	i = 0;
+	av = ft_strsplit(input, ' ');
+	while (av[i])
+	{
+		ft_printf("%s\n", av[i]);
+		i++;
+	}
+	param = new_param(i, av);
+	ft_ls(param);
+	//free av
+}
+
 int		main(void)
 {
 	char		*str;
@@ -81,6 +99,7 @@ int		main(void)
 		ft_putstr("$>");
 		str = get_input();
 		ft_printf("Input: %s\n", str);
+		temp_ls(str);
 		free(str);
 	}
 	return (0);

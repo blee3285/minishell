@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   free_ls.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/18 14:37:31 by blee              #+#    #+#             */
-/*   Updated: 2019/02/20 18:05:28 by blee             ###   ########.fr       */
+/*   Created: 2018/04/14 15:35:53 by blee              #+#    #+#             */
+/*   Updated: 2018/04/18 18:46:41 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "ft_ls.h"
 
-# include "../libft/includes/libft.h"
-# include "ft_ls.h"
-
-typedef struct			s_env
+void	free_file(t_file *file)
 {
-	char			*str;
-	struct s_env	*next;
-}						t_env;
+	free(file->name);
+	free(file->path);
+	free(file->perm);
+	free(file);
+}
 
-typedef struct			s_cmds
+void	free_ls_tree(t_btree *node)
 {
-	char	*name;
-	void	*ptr;
-}						t_cmds;
+	t_file	*file;
 
-#endif
+	file = node->data;
+	free(file->name);
+	free(file->path);
+	free(file->perm);
+	free(file);
+	free(node);
+}
+
+void	free_ls_param(t_param *param)
+{
+	ft_btsuffix(param->files, free_ls_tree);
+	free(param->flags);
+	free(param);
+}

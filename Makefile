@@ -6,7 +6,7 @@
 #    By: blee <blee@student.42.us.org>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/18 14:11:04 by blee              #+#    #+#              #
-#    Updated: 2019/01/18 14:37:37 by blee             ###   ########.fr        #
+#    Updated: 2019/02/20 18:31:00 by blee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,20 @@ LIBFT = ./libft/libft.a
 
 
 SRC_FILES = main.c \
+			ft_ls/bt_func.c \
+			ft_ls/bt_func2.c \
+			ft_ls/build_tree.c \
+			ft_ls/check_inputs.c \
+			ft_ls/file_att1.c \
+			ft_ls/file_att2.c \
+			ft_ls/ft_ls.c \
+			ft_ls/get_len.c \
+			ft_ls/init_file.c \
+			ft_ls/printing.c \
+			ft_ls/print_func.c \
+			ft_ls/print_long.c \
+			ft_ls/print_dir.c \
+			ft_ls/free_ls.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
@@ -29,6 +43,7 @@ $(LIBFT):
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
+	mkdir -p ./objs/ft_ls
 
 $(OBJS): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	gcc -Wall -Wextra -Werror -c $< -o $@ -I ./includes

@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_ls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/18 14:37:31 by blee              #+#    #+#             */
-/*   Updated: 2019/02/20 18:05:28 by blee             ###   ########.fr       */
+/*   Created: 2017/09/20 14:38:21 by blee              #+#    #+#             */
+/*   Updated: 2018/04/18 19:38:48 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "ft_ls.h"
 
-# include "../libft/includes/libft.h"
-# include "ft_ls.h"
-
-typedef struct			s_env
+int		ft_ls(t_param *param)
 {
-	char			*str;
-	struct s_env	*next;
-}						t_env;
-
-typedef struct			s_cmds
-{
-	char	*name;
-	void	*ptr;
-}						t_cmds;
-
-#endif
+	if (!param)
+		return (1);
+	ls_print(param);
+	if (param->flags[0] == '-' && param->firstls)
+		ft_putchar('\n');
+	if (param != NULL)
+		free_ls_param(param);
+	return (0);
+}

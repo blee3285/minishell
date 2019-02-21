@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   file_att2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/18 14:37:31 by blee              #+#    #+#             */
-/*   Updated: 2019/02/20 18:05:28 by blee             ###   ########.fr       */
+/*   Created: 2018/02/12 16:45:51 by blee              #+#    #+#             */
+/*   Updated: 2018/02/15 16:51:43 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "ft_ls.h"
 
-# include "../libft/includes/libft.h"
-# include "ft_ls.h"
-
-typedef struct			s_env
+char	*usr_name(uid_t uid)
 {
-	char			*str;
-	struct s_env	*next;
-}						t_env;
+	struct passwd	*info;
 
-typedef struct			s_cmds
+	info = getpwuid(uid);
+	if (!info)
+		return (NULL);
+	else
+		return (info->pw_name);
+}
+
+char	*grp_name(gid_t gid)
 {
-	char	*name;
-	void	*ptr;
-}						t_cmds;
+	struct group	*info;
 
-#endif
+	info = getgrgid(gid);
+	if (!info)
+		return (NULL);
+	else
+		return (info->gr_name);
+}
