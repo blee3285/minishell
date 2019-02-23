@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:36:33 by blee              #+#    #+#             */
-/*   Updated: 2019/02/20 18:51:33 by blee             ###   ########.fr       */
+/*   Updated: 2019/02/22 16:55:44 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*get_input(void)
 	free(temp);
 	return (str);
 }
-
+/*
 void	temp_ls(char *input)
 {
 	char	**av;
@@ -81,10 +81,11 @@ void	temp_ls(char *input)
 	ft_ls(param);
 	//free av
 }
-
+*/
 int		main(void)
 {
 	char		*str;
+	char		**av;
 	extern char	**environ;
 	t_env		*env;
 
@@ -98,8 +99,9 @@ int		main(void)
 	{
 		ft_putstr("$>");
 		str = get_input();
+		av = ft_strsplit(str, ' ');
 		ft_printf("Input: %s\n", str);
-		temp_ls(str);
+		msh_input(av);
 		free(str);
 	}
 	return (0);
