@@ -6,12 +6,12 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:29:12 by blee              #+#    #+#             */
-/*   Updated: 2019/02/25 18:40:27 by blee             ###   ########.fr       */
+/*   Updated: 2019/03/12 17:14:31 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 int		cmd_id(char *str)
 {
 	int		id;
@@ -37,12 +37,27 @@ int		cmd_id(char *str)
 		return (6);//exit
 	return (-1);
 }
+*/
+char	cmds[7][9] = {
+	"ls", "cd", "echo", "env", "setenv", "unsetenv", "exit"
+};
 
 int		msh_input(char **av)
 {
 	int		id;
+	int		i;
 
-	id = cmd_id(av[0]);
-	ft_printf("%d\n", id);
+	i = 0;
+	id = -1;
+	while (i < 7)
+	{
+		if (ft_strcmp(av[0], cmds[i]) == 0)
+			id = i;
+		i++;
+	}
+	if (id >= 0)
+		ft_printf("Command found: %s\n", cmds[id]);
+	else
+		ft_printf("Non-cmd found\n");
 	return (id);
 }

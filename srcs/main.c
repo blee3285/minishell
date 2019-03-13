@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:36:33 by blee              #+#    #+#             */
-/*   Updated: 2019/02/25 18:30:56 by blee             ###   ########.fr       */
+/*   Updated: 2019/03/12 18:39:11 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,19 @@ int		main(void)
 	t_env		*env;
 
 	env = init_env(environ);
+	/*
 	while (env)
 	{
 		ft_printf("%s\n", env->str);
 		env = env->next;
 	}
+	*/
 	while(1)
 	{
 		ft_putstr("$>");
 		str = get_input();
 		av = ft_strsplit(str, ' ');
-		ft_printf("Input: %s\n", str);
+		ft_printf("Input: |%s|\n", str);
 		msh_input(av);
 		free(str);
 	}
