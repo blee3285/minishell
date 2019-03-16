@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   msh_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/18 14:37:31 by blee              #+#    #+#             */
-/*   Updated: 2019/03/15 17:01:30 by blee             ###   ########.fr       */
+/*   Created: 2019/03/15 16:45:18 by blee              #+#    #+#             */
+/*   Updated: 2019/03/15 17:01:16 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "../libft/includes/libft.h"
-# include "ft_ls.h"
-
-typedef struct		s_env
+void	msh_exec(char **av, char **env)
 {
-	char			*str;
-	struct s_env	*next;
-}					t_env;
+	pid_t	pid;
 
-typedef struct		s_cmds
-{
-	char			*name;
-	void			*ptr;
-}					t_cmds;
-
-int					msh_input(char **av);
-void				msh_exec(char **av, char **env);
-
-#endif
+	pid = fork();
+	if (pid == 0)
+	{
+		execve(av[0], av, env);
+	}
+	wait(&pid);
+}

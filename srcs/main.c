@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:36:33 by blee              #+#    #+#             */
-/*   Updated: 2019/03/12 18:39:11 by blee             ###   ########.fr       */
+/*   Updated: 2019/03/15 17:19:49 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,29 +82,41 @@ void	temp_ls(char *input)
 	//free av
 }
 */
+
+void	free_str_arr(char **arr)
+{
+	int		i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
 int		main(void)
 {
 	char		*str;
 	char		**av;
 	extern char	**environ;
 	t_env		*env;
+	int			cmd;
 
 	env = init_env(environ);
-	/*
-	while (env)
-	{
-		ft_printf("%s\n", env->str);
-		env = env->next;
-	}
-	*/
 	while(1)
 	{
 		ft_putstr("$>");
 		str = get_input();
 		av = ft_strsplit(str, ' ');
 		ft_printf("Input: |%s|\n", str);
-		msh_input(av);
+		cmd = msh_input(av);
+		if (cmd == -1)
+			msh_exec(av, environ);
 		free(str);
+		free_str_arr(av);
+		if (cmd == 6)
+			exit(0);
 	}
-	return (0);
 }

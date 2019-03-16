@@ -6,7 +6,7 @@
 #    By: blee <blee@student.42.us.org>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/18 14:11:04 by blee              #+#    #+#              #
-#    Updated: 2019/02/22 16:53:48 by blee             ###   ########.fr        #
+#    Updated: 2019/03/15 16:59:58 by blee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ LIBFT = ./libft/libft.a
 
 SRC_FILES = main.c \
 			msh_input.c \
+			msh_exec.c \
 			ft_ls/bt_func.c \
 			ft_ls/bt_func2.c \
 			ft_ls/build_tree.c \
