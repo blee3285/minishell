@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_exec.c                                         :+:      :+:    :+:   */
+/*   msh_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/15 16:45:18 by blee              #+#    #+#             */
-/*   Updated: 2019/03/18 17:39:46 by blee             ###   ########.fr       */
+/*   Created: 2019/03/18 15:43:28 by blee              #+#    #+#             */
+/*   Updated: 2019/03/18 15:49:51 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	msh_exec(char **av, t_env *env)
+char	**msh_env_arr(t_env *env)
 {
-	pid_t	pid;
+	int		i;
+	t_env	*temp;
 	char	**env_arr;
 
-	if (access(av[0], X_OK) != 0)
+	i = 0;
+	temp = env;
+	while (temp)
 	{
-		ft_printf("Permission Denied\n");
-		return ;
+		i++;
+		temp = temp->next;
 	}
-	env_arr = msh_env_arr(env);
-	pid = fork();
-	if (pid == 0)
+	temp = env;
+	env_arr = (char**)malloc(sizeof(char*) * (i + 1));
+	ft_bzero(env_arr, sizeof(char*) * (i + 1));
+	i = 0;
+	while (temp)
 	{
-		execve(av[0], av, env_arr);
+		env_arr[i] = ft_strdup(temp->str);
+		i++;
+		temp = temp->next;
 	}
-	wait(&pid);
+	return (env_arr);
 }

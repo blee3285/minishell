@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:36:33 by blee              #+#    #+#             */
-/*   Updated: 2019/03/15 17:19:49 by blee             ###   ########.fr       */
+/*   Updated: 2019/03/18 17:33:45 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int		main(void)
 		ft_printf("Input: |%s|\n", str);
 		cmd = msh_input(av);
 		if (cmd == -1)
-			msh_exec(av, environ);
+			msh_exec(av, env);
 		free(str);
 		free_str_arr(av);
 		if (cmd == 6)
