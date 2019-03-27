@@ -6,41 +6,11 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:36:33 by blee              #+#    #+#             */
-/*   Updated: 2019/03/18 17:33:45 by blee             ###   ########.fr       */
+/*   Updated: 2019/03/26 16:11:42 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_env	*new_env(char *str)
-{
-	t_env	*new;
-
-	new = (t_env*)malloc(sizeof(t_env));
-	new->str = ft_strdup(str);
-	new->next = NULL;
-	return (new);
-}
-
-t_env	*init_env(char **environ)
-{
-	int		i;
-	t_env	*env;
-	t_env	*out;
-
-	i = 1;
-	if (!environ)
-		return (NULL);
-	env = new_env(environ[0]);
-	out = env;
-	while (environ[i])
-	{
-		env->next = new_env(environ[i]);
-		env = env->next;
-		i++;
-	}
-	return (out);
-}
 
 char	*get_input(void)
 {
@@ -83,28 +53,15 @@ void	temp_ls(char *input)
 }
 */
 
-void	free_str_arr(char **arr)
-{
-	int		i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
 int		main(void)
 {
 	char		*str;
 	char		**av;
 	extern char	**environ;
-	t_env		*env;
 	int			cmd;
+	t_msh		*msh;
 
-	env = init_env(environ);
+	msh = new_msh(environ);
 	while(1)
 	{
 		ft_putstr("$>");
@@ -113,9 +70,9 @@ int		main(void)
 		ft_printf("Input: |%s|\n", str);
 		cmd = msh_input(av);
 		if (cmd == -1)
-			msh_exec(av, env);
+			msh_exec(av, msh->env);
 		free(str);
-		free_str_arr(av);
+		msh_free_arr(av);
 		if (cmd == 6)
 			exit(0);
 	}

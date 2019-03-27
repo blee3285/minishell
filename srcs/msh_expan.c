@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_free.c                                         :+:      :+:    :+:   */
+/*   msh_expan.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/18 15:50:42 by blee              #+#    #+#             */
-/*   Updated: 2019/03/26 15:52:55 by blee             ###   ########.fr       */
+/*   Created: 2019/03/26 15:03:25 by blee              #+#    #+#             */
+/*   Updated: 2019/03/26 18:41:02 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	msh_free_env(t_env *env)
+char	*msh_get_value(char *name, t_env *env)
 {
-	t_env	*last;
-
-	last = env;
-	while(env)
-	{
-		free(env->str);
-		env = env->next;
-		if (last)
-			free(last);
-		last = env;
-	}
-}
-
-void	msh_free_arr(char **arr)
-{
+	char	*value;
 	int		i;
 
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
+	i = ft_strlen(name);
+	while (env && (ft_strncmp(env->str, name, i) != 0))
+		env = env->next;
+	value = ft_strdup(&(env->str[i + 1]));
+	return (value);
 }

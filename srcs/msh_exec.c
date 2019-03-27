@@ -6,11 +6,29 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 16:45:18 by blee              #+#    #+#             */
-/*   Updated: 2019/03/18 17:39:46 by blee             ###   ########.fr       */
+/*   Updated: 2019/03/26 16:44:19 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		msh_check(char *file, char *dir_name)
+{
+	DIR				*dir;
+	struct	dirent	*sd;
+	int				check;
+
+	check = 0;
+	if (!(dir = opendir(dir_name)))
+		return (0);
+	while((sd = readdir(dir) != NULL))
+	{
+		if (ft_strcmp(sd->d_name, file) == 0)
+			check = 1;
+	}
+	closedir(dir);
+	return (check);
+}
 
 void	msh_exec(char **av, t_env *env)
 {

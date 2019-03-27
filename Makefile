@@ -6,7 +6,7 @@
 #    By: blee <blee@student.42.us.org>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/18 14:11:04 by blee              #+#    #+#              #
-#    Updated: 2019/03/18 17:28:02 by blee             ###   ########.fr        #
+#    Updated: 2019/03/26 15:52:38 by blee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRC_FILES = main.c \
 			msh_input.c \
 			msh_exec.c \
 			msh_helper.c \
+			msh_init_env.c \
+			msh_free.c \
 			ft_ls/bt_func.c \
 			ft_ls/bt_func2.c \
 			ft_ls/build_tree.c \
