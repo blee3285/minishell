@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 16:45:18 by blee              #+#    #+#             */
-/*   Updated: 2019/03/26 16:44:19 by blee             ###   ########.fr       */
+/*   Updated: 2019/03/29 16:42:37 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		msh_check(char *file, char *dir_name)
 	check = 0;
 	if (!(dir = opendir(dir_name)))
 		return (0);
-	while((sd = readdir(dir) != NULL))
+	while(((sd = readdir(dir)) != NULL))
 	{
 		if (ft_strcmp(sd->d_name, file) == 0)
 			check = 1;

@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:29:12 by blee              #+#    #+#             */
-/*   Updated: 2019/03/12 17:14:31 by blee             ###   ########.fr       */
+/*   Updated: 2019/03/29 17:46:01 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	cmds[7][9] = {
 	"ls", "cd", "echo", "env", "setenv", "unsetenv", "exit"
 };
 
-int		msh_input(char **av)
+int		msh_cmd_id(char **av)
 {
 	int		id;
 	int		i;

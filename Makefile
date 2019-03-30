@@ -6,7 +6,7 @@
 #    By: blee <blee@student.42.us.org>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/18 14:11:04 by blee              #+#    #+#              #
-#    Updated: 2019/03/26 15:52:38 by blee             ###   ########.fr        #
+#    Updated: 2019/03/29 17:45:50 by blee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ LIBFT = ./libft/libft.a
 
 
 SRC_FILES = main.c \
-			msh_input.c \
+			msh_get_input.c \
+			msh_cmd_id.c \
 			msh_exec.c \
 			msh_helper.c \
 			msh_init_env.c \
