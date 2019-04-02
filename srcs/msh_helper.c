@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 15:43:28 by blee              #+#    #+#             */
-/*   Updated: 2019/03/29 16:57:48 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/01 18:18:52 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,17 @@ char	*msh_get_value(char *name, t_env *env)
 	if (!env)
 		return (NULL);
 	return (value);
+}
+
+char	*msh_get_name(char *str)
+{
+	char	*name;
+	int		i;
+
+	i = 0;
+	while (str[i] && str[i] != '=')
+		i++;
+	name = ft_strnew(i + 1);
+	ft_strncpy(name, str, i);
+	return (name);
 }

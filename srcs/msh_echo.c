@@ -1,51 +1,63 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_cmd_id.c                                       :+:      :+:    :+:   */
+/*   msh_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/23 15:29:12 by blee              #+#    #+#             */
-/*   Updated: 2019/04/01 18:11:21 by blee             ###   ########.fr       */
+/*   Created: 2019/04/01 18:31:55 by blee              #+#    #+#             */
+/*   Updated: 2019/04/01 18:47:34 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	cmds[7][9] = {
-	"ls", "cd", "echo", "env", "setenv", "unsetenv", "exit"
-};
-
-int		msh_cmd_id(char **av)
+int		msh_putstr(char *str, t_msh *msh)
 {
-	int		id;
 	int		i;
 
 	i = 0;
-	id = -1;
-	while (i < 7)
+	while (str[i])
 	{
-		if (ft_strcmp(av[0], cmds[i]) == 0)
-			id = i;
+		if (str[i] == '$')
+		{
+			//look in msh->env for value;
+		}
+		else if (str[i] == '~')
+		{
+			//look in msh->env home for value;
+		}
+		else
+			ft_putchar(str[i]);
 		i++;
 	}
-	if (id >= 0)
-		ft_printf("Command found: %s\n", cmds[id]);
-	else
-		ft_printf("Non-cmd found\n");
-	return (id);
+	return (0);
 }
 
-int		msh_flag_check(char **av)
+int		msh_print_arr(char **av, t_msh *msh)
 {
 	int		i;
 
-	i = 0;
+	i = 1;
+	if (av[0])
+		msh_putstr(av[0], msh);
 	while (av[i])
 	{
-		if (av[i][0] == '-')
-			return (1);
+		ft_putchar(' ');
+		msh_putstr(av[i]);
 		i++;
 	}
+	ft_putchar('\n');
+	return (0);
+}
+
+int		msh_echo(char **av, t_msh *msh)
+{
+	if (!av[0])
+	{
+		ft_printf("\n");
+		return (0);
+	}
+	msh_print_arr(av, msh);
 	return (0);
 }
