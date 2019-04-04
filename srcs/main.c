@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:36:33 by blee              #+#    #+#             */
-/*   Updated: 2019/03/29 17:50:13 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/03 18:43:06 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,44 @@ void	temp_ls(char *input)
 	//free av
 }
 */
+
+int		msh_read_cmd(char *str, t_msh *msh)
+{
+	char	**inputs;
+	int		cmd_id;
+
+	cmd_id = -1;
+	inputs = ft_strsplit(str, ' ');
+	cmd_id = msh_cmd_id(inputs);
+	if (cmd_id == -1)
+		msh_exec(inputs, msh->env);
+	msh_free_arr(inputs);
+	if (cmd_id == 6)
+		return (1);
+	return (0);
+}
+
+int		msh_input(char *str, t_msh *msh)
+{
+	char	**inputs;
+	int		i;
+	int		cmd;
+
+	i = 0;
+	cmd = -1;
+	inputs = ft_strsplit(str, ';');
+	while (inputs[i])
+	{
+		if (msh_read_cmd(inputs[i], msh))
+		{
+			msh_free_arr(inputs);
+			return (1);
+		}
+		i++;
+	}
+	msh_free_arr(inputs);
+	return (0);
+}
 
 int		main(void)
 {
