@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:37:31 by blee              #+#    #+#             */
-/*   Updated: 2019/03/29 17:45:56 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/11 18:16:02 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char				**msh_env_arr(t_env *env);
 t_env				*msh_init_env(char **environ);
 t_msh				*new_msh(char **environ);
 char				*msh_get_input(void);
+char				**msh_strsplit(char *str);
 void				msh_free_env(t_env *env);
 void				msh_free_arr(char **arr);
 

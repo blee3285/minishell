@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 18:43:25 by blee              #+#    #+#             */
-/*   Updated: 2019/04/08 18:55:36 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/11 18:32:40 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,22 @@
 
 //string split that also handles quotation marks and split by spaces/tabs/etc
 
-char	*dup_substr(char *str, int start, int end)
+char	*dup_substr(char *str, int st, int end)
 {
 	char	*new;
 	int		i;
 	int		size;
 
-	size = end - start + 1;
+	size = end - st + 1;
 	i = 0;
 	new = ft_strnew(size);
-	while (start <= end)
+	while (st <=  end)
 	{
-		if (str[start] == '\"' && start == 0)
-			start++;
-		else if (str[start] == '\"' && str[start - 1] != '\')
-			start++;
-		new[i] = str[start];
-		start++;
+		if ((str[st] == '\\' && (str[st + 1] == '\"' || str[st + 1] == '\''))
+				|| (str[st] == '\"' || str[st] == '\''))
+			st++;
+		new[i] = str[st];
+		st++;
 		i++;
 	}
 	return (new);
@@ -44,7 +43,7 @@ int		skip_substr(char *str, char type)
 	if (type == '\"')
 	{
 		i++;
-		while (str[i] && (str[i] != '\"'))
+		while (str[i] && ((str[i] != '\"') || (str[i] != '\'')))
 			i++;
 	}
 	else if (type == ' ')
@@ -52,12 +51,21 @@ int		skip_substr(char *str, char type)
 		while (str[i] && str[i] <= 32)
 			i++;
 	}
-	else if (type == 'a')
+	return (i);
+}
+
+int		substr_len(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] > 32)
 	{
-		while (str[i] && str[i] > 32 && str[i] != '\"')
+		if (str[i] == '\\' && (str[i + 1] == '\'' || str[i + 1] == '\"'))
 			i++;
-		if (str[i] == '\"')
-			i--;
+		else if (str[i] == '\'' || str[i] == '\"')
+			i += skip_substr(&str[i], '\"') - 1;
+		i++;
 	}
 	return (i);
 }
@@ -71,8 +79,13 @@ int		split_count(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\"')
-			i += skip_substr(&str[i], '\"');
+		if (str[i] == '\\')
+		{
+			if (str[i + 1] == '\"' || str[i + 1] == '\'')
+				i += 2;
+		}
+		else if (str[i] == '\"' || str[i] == '\'')
+			i += skip_substr(&str[i], '\"') - 1;
 		if ((str[i] <= 32) && (str[i + 1] > 32))
 			count++;
 		i++;
@@ -90,14 +103,16 @@ char	**msh_strsplit(char *str)
 	i = 0;
 	si = 0;
 	splits = split_count(str);
-	out = (char**)malloc(sizeof(char*) * splits + 1);
-	ft_bzero(out, (sizeof(char*) * splits + 1));
+	ft_printf("Found %d inputs\n", splits);
+	out = (char**)malloc(sizeof(char*) * (splits + 1));
+	ft_bzero(out, (sizeof(char*) * (splits + 1)));
 	while (i < splits)
 	{
 		si += skip_substr(&str[si], ' ');
-
+		out[i] = dup_substr(str, si, substr_len(&str[si]));
 		i++;
 	}
+	return (out);
 }
 
 //still need to handle both types of quotes and to properly skip over them if needed
