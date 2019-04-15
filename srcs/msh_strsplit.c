@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 18:43:25 by blee              #+#    #+#             */
-/*   Updated: 2019/04/11 18:32:40 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/15 16:29:02 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,43 @@
 
 //string split that also handles quotation marks and split by spaces/tabs/etc
 
+int		cpy_to_char(char **dest, char *src, int st, char c)
+{
+	char	*temp;
+	int		i;
+
+	temp = *dest;
+	i = st;
+	while(*src || *src != c)
+	{
+		temp[i] = *src;
+		src++;
+		i++;
+	}
+	return (i - st);
+}
+
 char	*dup_substr(char *str, int st, int end)
 {
 	char	*new;
 	int		i;
 	int		size;
+	int		jump;
 
 	size = end - st + 1;
 	i = 0;
+	jump = 0;
 	new = ft_strnew(size);
 	while (st <=  end)
 	{
-		if ((str[st] == '\\' && (str[st + 1] == '\"' || str[st + 1] == '\''))
-				|| (str[st] == '\"' || str[st] == '\''))
-			st++;
+		if (str[st] == '\\' && (str[st + 1] == '\"' || str[st + 1] == '\''))
+				st++;
+		else if (str[st] == '\"' || str[st] == '\'')
+		{
+			jump = cpy_to_char(&new, &str[st], i, str[st]);
+			st += jump;
+			i += jump;
+		}
 		new[i] = str[st];
 		st++;
 		i++;
@@ -35,6 +58,7 @@ char	*dup_substr(char *str, int st, int end)
 	return (new);
 }
 
+/*
 int		skip_substr(char *str, char type)
 {
 	int		i;
@@ -53,6 +77,25 @@ int		skip_substr(char *str, char type)
 	}
 	return (i);
 }
+*/
+
+int		skip_to_c(char *str, char c)
+{
+	int		i;
+
+	i = 1;
+	if (c == ' ')
+	{
+		while (str[i] && str[i] > 32)
+			i++;
+	}
+	else
+	{
+		while (str[i] && str[i] != c)
+			i++;
+	}
+	return (i);
+}
 
 int		substr_len(char *str)
 {
@@ -64,10 +107,10 @@ int		substr_len(char *str)
 		if (str[i] == '\\' && (str[i + 1] == '\'' || str[i + 1] == '\"'))
 			i++;
 		else if (str[i] == '\'' || str[i] == '\"')
-			i += skip_substr(&str[i], '\"') - 1;
+			i += (skip_to_c(&str[i], str[i]) - 1);
 		i++;
 	}
-	return (i);
+	return (i - 1);
 }
 
 int		split_count(char *str)
@@ -85,10 +128,11 @@ int		split_count(char *str)
 				i += 2;
 		}
 		else if (str[i] == '\"' || str[i] == '\'')
-			i += skip_substr(&str[i], '\"') - 1;
+			i += skip_to_c(&str[i], str[i]);
 		if ((str[i] <= 32) && (str[i + 1] > 32))
 			count++;
-		i++;
+		if (str[i])
+			i++;
 	}
 	return (count + 1);
 }
@@ -108,7 +152,8 @@ char	**msh_strsplit(char *str)
 	ft_bzero(out, (sizeof(char*) * (splits + 1)));
 	while (i < splits)
 	{
-		si += skip_substr(&str[si], ' ');
+		while(str[si] <= ' ')
+			si++;
 		out[i] = dup_substr(str, si, substr_len(&str[si]));
 		i++;
 	}
