@@ -6,13 +6,11 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 18:43:25 by blee              #+#    #+#             */
-/*   Updated: 2019/04/17 17:21:06 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/17 17:35:38 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//string split that also handles quotation marks and split by spaces/tabs/etc
 
 int		cpy_to_c(char *dst, char *src, int *i, int *st, char c)
 {
@@ -33,18 +31,18 @@ char	*dup_substr(char *str, int st, int end)
 {
 	char	*new;
 	int		i;
-	int		size;
-	int		jump;
 
-	size = end - st + 1;
 	i = 0;
-	jump = 0;
-	new = ft_strnew(size);
+	new = ft_strnew(end - st + 1);
 	while (st < end)
 	{
 		if (str[st] == '\\' && (str[st + 1] == '\"' || str[st + 1] == '\''))
+		{
 			st++;
-		if (str[st] == '\'' || str[st] == '\"')
+			new[i] = str[st];
+			i++;
+		}
+		else if (str[st] == '\'' || str[st] == '\"')
 			cpy_to_c(new, str, &i, &st, str[st]);
 		else
 		{
@@ -55,27 +53,6 @@ char	*dup_substr(char *str, int st, int end)
 	}
 	return (new);
 }
-
-/*
-int		skip_substr(char *str, char type)
-{
-	int		i;
-
-	i = 0;
-	if (type == '\"')
-	{
-		i++;
-		while (str[i] && ((str[i] != '\"') || (str[i] != '\'')))
-			i++;
-	}
-	else if (type == ' ')
-	{
-		while (str[i] && str[i] <= 32)
-			i++;
-	}
-	return (i);
-}
-*/
 
 int		skip_to_c(char *str, char c)
 {
@@ -162,5 +139,3 @@ char	**msh_strsplit(char *str)
 	}
 	return (out);
 }
-
-//still need to handle both types of quotes and to properly skip over them if needed
