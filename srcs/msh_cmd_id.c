@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 15:29:12 by blee              #+#    #+#             */
-/*   Updated: 2019/04/01 18:11:21 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/22 16:45:23 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ int		msh_cmd_id(char **av)
 			id = i;
 		i++;
 	}
+	/*
 	if (id >= 0)
 		ft_printf("Command found: %s\n", cmds[id]);
 	else
 		ft_printf("Non-cmd found\n");
+	*/
 	return (id);
 }
 

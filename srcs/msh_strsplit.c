@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 18:43:25 by blee              #+#    #+#             */
-/*   Updated: 2019/04/17 17:35:38 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/22 16:40:47 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ char	**msh_strsplit(char *str)
 	si = 0;
 	substr = 0;
 	splits = split_count(str);
-	ft_printf("Found %d inputs\n", splits);
 	out = (char**)malloc(sizeof(char*) * (splits + 1));
 	ft_bzero(out, (sizeof(char*) * (splits + 1)));
 	while (i < splits)
@@ -132,7 +131,6 @@ char	**msh_strsplit(char *str)
 		while(str[si] <= ' ')
 			si++;
 		substr = substr_len(&str[si]);
-		ft_printf("Copying length: %d\n", substr);
 		out[i] = dup_substr(str, si, substr + si);
 		si += substr;
 		i++;

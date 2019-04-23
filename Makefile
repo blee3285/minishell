@@ -6,7 +6,7 @@
 #    By: blee <blee@student.42.us.org>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/18 14:11:04 by blee              #+#    #+#              #
-#    Updated: 2019/04/11 15:02:40 by blee             ###   ########.fr        #
+#    Updated: 2019/04/22 16:18:46 by blee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC_FILES = main.c \
 			msh_get_input.c \
 			msh_cmd_id.c \
 			msh_exec.c \
+			msh_echo.c \
 			msh_helper.c \
 			msh_init_env.c \
 			msh_strsplit.c \
