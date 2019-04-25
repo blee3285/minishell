@@ -6,12 +6,12 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:31:55 by blee              #+#    #+#             */
-/*   Updated: 2019/04/22 18:24:36 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/24 14:58:19 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
+
 int		msh_putstr(char *str, t_msh *msh)
 {
 	char	*temp;
@@ -40,7 +40,7 @@ int		msh_putstr(char *str, t_msh *msh)
 
 	return (0);
 }
-*/
+/*
 char	*get_expan(char *str, t_msh *msh)
 {
 	char	*out;
@@ -93,7 +93,7 @@ char	*msh_get_str(char *str, t_msh *msh)
 	}
 	return (out);
 }
-/*
+*/
 int		msh_print_arr(char **av, t_msh *msh)
 {
 	int		i;
@@ -110,7 +110,7 @@ int		msh_print_arr(char **av, t_msh *msh)
 	ft_putchar('\n');
 	return (0);
 }
-*/
+
 int		msh_echo(char **av, t_msh *msh)
 {
 	if (!av[1])
