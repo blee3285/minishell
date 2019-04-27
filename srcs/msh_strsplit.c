@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 18:43:25 by blee              #+#    #+#             */
-/*   Updated: 2019/04/22 16:40:47 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/26 14:44:46 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ int		cpy_to_c(char *dst, char *src, int *i, int *st, char c)
 	int		size;
 
 	size = *i;
-	*st = *st + 1;
 	while(src[*st] && src[*st] != c)
 	{
 		dst[*i] = src[*st];
 		*st = *st + 1;
 		*i = *i + 1;
 	}
+	dst[*i] = src[*st];
+	*i = *i + 1;
 	return (*i - size);
 }
 
@@ -42,7 +43,8 @@ char	*dup_substr(char *str, int st, int end)
 			new[i] = str[st];
 			i++;
 		}
-		else if (str[st] == '\'' || str[st] == '\"')
+		
+		if (str[st] == '\'' || str[st] == '\"')
 			cpy_to_c(new, str, &i, &st, str[st]);
 		else
 		{

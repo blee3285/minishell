@@ -6,13 +6,13 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:34:19 by blee              #+#    #+#             */
-/*   Updated: 2019/03/26 16:09:16 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/26 18:32:46 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*new_env(char *str)
+t_env	*msh_new_env(char *str)
 {
 	t_env	*new;
 
@@ -35,13 +35,13 @@ t_env	*msh_init_env(char **environ)
 	i = 1;
 	if (!environ)
 		return (NULL);
-	temp = new_env(environ[0]);
+	temp = msh_new_env(environ[0]);
 	if (!temp)
 		return (NULL);
 	env = temp;
 	while (environ[i])
 	{
-		temp->next = new_env(environ[i]);
+		temp->next = msh_new_env(environ[i]);
 		if (!(temp->next))
 		{
 			msh_free_env(env);

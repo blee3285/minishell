@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/04/24 17:54:08 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/26 16:31:57 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@ char	*strdup_sp(char *str)
 
 int		sub_home(char *str, t_msh *msh, int a)
 {
+	char	*temp;
+
 }
 
 int		sub_other(char *str, t_msh *msh, int a)
 {
+	char	*temp;
+
 }
 
 int		sub_exp(char **av, t_msh *msh, int id)
@@ -44,7 +48,11 @@ int		sub_exp(char **av, t_msh *msh, int id)
 	temp = av[i]
 	while (temp[i])
 	{
-		if (temp[i] == '~')
+		if (temp[i] == '\'')
+
+		else if (temp[i] == '\\')
+		
+		else if (temp[i] == '~')
 		{
 			exp = sub_home(temp, msh, i);
 		}
