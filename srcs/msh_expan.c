@@ -6,12 +6,12 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/04/26 16:31:57 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/29 18:18:46 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 char	*strdup_sp(char *str)
 {
 	int		i;
@@ -72,6 +72,28 @@ int		msh_expan(char **av, t_msh *msh)
 	while (av[i])
 	{
 		sub_exp(av, msh, i);
+		i++;
+	}
+}
+*/
+
+int		msh_expan(char *str, t_msh *msh)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+			//skip to end of quote
+		else if (str[i] == '\"')
+			//ignore ~ within quotes
+		else if (str[i] == '\')
+			//ignore special char after it
+		else if (str[i] == '~')
+			//add $HOME to exp, not going to check for users
+		else if (str[i] == '$')
+			//add var to exp if found, otherwise add empty str
 		i++;
 	}
 }

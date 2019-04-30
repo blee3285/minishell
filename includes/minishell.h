@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:37:31 by blee              #+#    #+#             */
-/*   Updated: 2019/04/26 18:32:22 by blee             ###   ########.fr       */
+/*   Updated: 2019/04/29 17:17:16 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct		s_cmds
 typedef struct		s_msh
 {
 	t_env			*env;
+	t_env			*exp;
 	int				cmd_id;
 }					t_msh;
 
