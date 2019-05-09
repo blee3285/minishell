@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/04/29 18:18:46 by blee             ###   ########.fr       */
+/*   Updated: 2019/05/08 19:12:09 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,44 @@ int		msh_expan(char **av, t_msh *msh)
 }
 */
 
-int		msh_expan(char *str, t_msh *msh)
+t_env	*get_expan(char *str)
 {
 	int		i;
+	t_env	**lst;
 
 	i = 0;
+	lst = NULL;
 	while (str[i])
 	{
 		if (str[i] == '\'')
-			//skip to end of quote
+
 		else if (str[i] == '\"')
+
+		else if (str[i] == )
+		i++;
+	}
+}
+
+int		msh_expan(char *str, t_msh *msh)
+{
+	int		i;
+	char	*new;
+	t_env	*lst;
+
+	//make a new string with the expansions expanded and storing it in msh
+	//scan string for valid $ and ~, store the expanded values in a linked list
+	//get the length of str + expansions, and malloc new string, or use a combo of strcpy and strjoin?
+	//cpy str with the expansions
+	//free the old string and the expansions
+	i = 0;
+	lst = NULL;
+	new = NULL;
+	/*
+	while (str[i])
+	{
+		if (str[i] == '\'')
+			//ignore all special char within quotes
+		else if (str[i] == '\"')i
 			//ignore ~ within quotes
 		else if (str[i] == '\')
 			//ignore special char after it
@@ -96,4 +124,5 @@ int		msh_expan(char *str, t_msh *msh)
 			//add var to exp if found, otherwise add empty str
 		i++;
 	}
+	*/
 }

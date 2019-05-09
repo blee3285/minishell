@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:34:19 by blee              #+#    #+#             */
-/*   Updated: 2019/04/29 17:16:56 by blee             ###   ########.fr       */
+/*   Updated: 2019/05/08 18:56:58 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_msh	*new_msh(char **environ)
 	if (!msh)
 		return (NULL);
 	msh->env = msh_init_env(environ);
-	msh->exp = NULL;
+	msh->input = NULL;
 	msh->cmd_id = -1;
 	return (msh);
 }
