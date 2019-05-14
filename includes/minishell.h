@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:37:31 by blee              #+#    #+#             */
-/*   Updated: 2019/04/29 17:17:16 by blee             ###   ########.fr       */
+/*   Updated: 2019/05/08 18:56:04 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct		s_cmds
 typedef struct		s_msh
 {
 	t_env			*env;
-	t_env			*exp;
+	char			*input;
 	int				cmd_id;
 }					t_msh;
 
@@ -44,6 +44,8 @@ char				*msh_get_value(char *name, t_env *env);
 char				*msh_get_name(char *str);
 
 t_env				*msh_init_env(char **environ);
+int					msh_add_env(t_env **dst, t_env *new);
+int					msh_del_env(t_env **env, char *name);
 t_env				*msh_new_env(char *str);
 t_msh				*new_msh(char **environ);
 char				*msh_get_input(void);
