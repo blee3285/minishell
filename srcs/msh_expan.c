@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/05/08 19:12:09 by blee             ###   ########.fr       */
+/*   Updated: 2019/05/14 19:16:11 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,21 @@ int		msh_expan(char **av, t_msh *msh)
 	}
 }
 */
+int		sp_char(char *str, int **quote)
+{
+
+}
+
 
 t_env	*get_expan(char *str)
 {
 	int		i;
+	int		quote[2];
 	t_env	**lst;
 
 	i = 0;
+	quote[0] = 0;
+	quote[1] = 0;
 	lst = NULL;
 	while (str[i])
 	{
@@ -101,7 +109,7 @@ int		msh_expan(char *str, t_msh *msh)
 	char	*new;
 	t_env	*lst;
 
-	//make a new string with the expansions expanded and storing it in msh
+	//make a new string with the expansions expanded and storing it in msh as a linked list
 	//scan string for valid $ and ~, store the expanded values in a linked list
 	//get the length of str + expansions, and malloc new string, or use a combo of strcpy and strjoin?
 	//cpy str with the expansions

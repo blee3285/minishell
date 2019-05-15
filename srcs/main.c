@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:36:33 by blee              #+#    #+#             */
-/*   Updated: 2019/04/22 16:45:02 by blee             ###   ########.fr       */
+/*   Updated: 2019/05/14 17:15:55 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,15 @@ int		msh_input(char *str, t_msh *msh)
 	}
 	msh_free_arr(inputs);
 	return (0);
+}
+
+void	print_env(t_env *env)
+{
+	while (env)
+	{
+		ft_printf("%s\n", env->str);
+		env = env->next;
+	}
 }
 
 int		main(void)
