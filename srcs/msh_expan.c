@@ -6,12 +6,12 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/05/14 19:16:11 by blee             ###   ########.fr       */
+/*   Updated: 2019/05/28 17:53:28 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
+
 char	*strdup_sp(char *str)
 {
 	int		i;
@@ -45,7 +45,7 @@ int		sub_exp(char **av, t_msh *msh, int id)
 
 	i = 0;
 	exp = NULL;
-	temp = av[i]
+	temp = av[id]
 	while (temp[i])
 	{
 		if (temp[i] == '\'')
@@ -75,7 +75,9 @@ int		msh_expan(char **av, t_msh *msh)
 		i++;
 	}
 }
-*/
+
+
+/*
 int		sp_char(char *str, int **quote)
 {
 
@@ -103,7 +105,7 @@ t_env	*get_expan(char *str)
 	}
 }
 
-int		msh_expan(char *str, t_msh *msh)
+int		msh_expan()
 {
 	int		i;
 	char	*new;
@@ -117,7 +119,7 @@ int		msh_expan(char *str, t_msh *msh)
 	i = 0;
 	lst = NULL;
 	new = NULL;
-	/*
+	
 	while (str[i])
 	{
 		if (str[i] == '\'')
@@ -132,5 +134,6 @@ int		msh_expan(char *str, t_msh *msh)
 			//add var to exp if found, otherwise add empty str
 		i++;
 	}
-	*/
+	
 }
+*/
