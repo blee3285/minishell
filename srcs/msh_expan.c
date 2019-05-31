@@ -6,12 +6,13 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/05/28 17:53:28 by blee             ###   ########.fr       */
+/*   Updated: 2019/05/30 18:28:38 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
 char	*strdup_sp(char *str)
 {
 	int		i;
@@ -28,13 +29,30 @@ char	*strdup_sp(char *str)
 int		sub_home(char *str, t_msh *msh, int a)
 {
 	char	*temp;
-
 }
 
 int		sub_other(char *str, t_msh *msh, int a)
 {
 	char	*temp;
+}
+*/
 
+char	*msh_slice(char *str, int sta, int end)
+{
+	char	*out;
+	int		len;
+	int		i;
+
+	i = 0;
+	len = end - start;
+	out = ft_strnew(len);
+	while(sta < end)
+	{
+		out[i] = str[sta];
+		i++;	
+		sta++;
+	}
+	return(out);
 }
 
 int		sub_exp(char **av, t_msh *msh, int id)
@@ -48,19 +66,7 @@ int		sub_exp(char **av, t_msh *msh, int id)
 	temp = av[id]
 	while (temp[i])
 	{
-		if (temp[i] == '\'')
-
-		else if (temp[i] == '\\')
 		
-		else if (temp[i] == '~')
-		{
-			exp = sub_home(temp, msh, i);
-		}
-		else if (temp[i] == '$')
-		{
-			exp = sub_other(temp, msh, i);
-		}
-		i++;
 	}
 }
 
@@ -76,13 +82,11 @@ int		msh_expan(char **av, t_msh *msh)
 	}
 }
 
-
 /*
 int		sp_char(char *str, int **quote)
 {
 
 }
-
 
 t_env	*get_expan(char *str)
 {
@@ -134,6 +138,5 @@ int		msh_expan()
 			//add var to exp if found, otherwise add empty str
 		i++;
 	}
-	
 }
 */
