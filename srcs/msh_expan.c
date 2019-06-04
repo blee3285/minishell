@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/05/30 18:28:38 by blee             ###   ########.fr       */
+/*   Updated: 2019/06/03 19:43:46 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,25 @@ char	*msh_slice(char *str, int sta, int end)
 	return(out);
 }
 
-int		sub_exp(char **av, t_msh *msh, int id)
+t_env	*get_slice(char *str, t_msh *msh)
 {
-	int		i;
-	char	*temp;
-	char	*exp;
+	t_env	*subs;
+	int		st;
+	int		ed;
 
-	i = 0;
-	exp = NULL;
-	temp = av[id]
-	while (temp[i])
+	st = 0;
+	ed = 0;
+	while (str[ed])
 	{
-		
+		//iterate till you hit a special char (", ', $, ~)
+		//check if / in front of special char, skip if found
+		//for ' skip till end quote
+		//for " check for $, otherwise skip to end quote
+		//if $ found, make a slice of everything before
+		//skip to end of special char (either a space if in a double quote, another $, or end of str) and slice again
+		//repeat still end of str
+		//handle ~ elsewhere
+		i++;
 	}
 }
 
