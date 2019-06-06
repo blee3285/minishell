@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:36:33 by blee              #+#    #+#             */
-/*   Updated: 2019/05/14 17:15:55 by blee             ###   ########.fr       */
+/*   Updated: 2019/06/05 18:55:17 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,25 @@ void	print_env(t_env *env)
 		env = env->next;
 	}
 }
+/*
+char	*msh_slice(char *str, int sta, int end)
+{
+	char	*out;
+	int		len;
+	int		i;
 
+	i = 0;
+	len = end - sta;
+	out = ft_strnew(len);
+	while (sta < end)
+	{
+		out[i] = str[sta];
+		i++;
+		sta++;
+	}
+	return (out);
+}
+*/
 int		main(void)
 {
 	char		*str;

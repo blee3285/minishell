@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/06/03 19:43:46 by blee             ###   ########.fr       */
+/*   Updated: 2019/06/05 18:52:12 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*msh_slice(char *str, int sta, int end)
 	int		i;
 
 	i = 0;
-	len = end - start;
+	len = end - sta;
 	out = ft_strnew(len);
 	while(sta < end)
 	{
@@ -57,7 +57,7 @@ char	*msh_slice(char *str, int sta, int end)
 
 t_env	*get_slice(char *str, t_msh *msh)
 {
-	t_env	*subs;
+	t_env	*slices;
 	int		st;
 	int		ed;
 
@@ -72,9 +72,13 @@ t_env	*get_slice(char *str, t_msh *msh)
 		//if $ found, make a slice of everything before
 		//skip to end of special char (either a space if in a double quote, another $, or end of str) and slice again
 		//repeat still end of str
-		//handle ~ elsewhere
-		i++;
+		//hanle ~ elsewhere	if (str[ed] == '\'')
+		while (find_match(str[ed], "\"\'$") == 0 && str[ed])
+			ed++;
+		msh_add_env(&slices, msh_new_env(msh_slice(str, st, ed)));
+		st = ed;
 	}
+	return (slices);
 }
 
 int		msh_expan(char **av, t_msh *msh)
