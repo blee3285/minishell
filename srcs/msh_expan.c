@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/06/05 18:52:12 by blee             ###   ########.fr       */
+/*   Updated: 2019/06/11 17:51:43 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,25 @@ char	*msh_slice(char *str, int sta, int end)
 	return(out);
 }
 
+void	slice_quote(char *str, int *sta, int *end)
+{
+	int		i;
+	int		quote;
+
+	i = *sta + 1;
+	quote = *sta;
+	if (quote == '\'')
+	{
+		while (str[i] && str[i] != '\'')
+			i++;
+		*end = i;
+	}
+	else if (quote == '\"')
+	{
+
+	}
+}
+
 t_env	*get_slice(char *str, t_msh *msh)
 {
 	t_env	*slices;
@@ -77,6 +96,9 @@ t_env	*get_slice(char *str, t_msh *msh)
 			ed++;
 		msh_add_env(&slices, msh_new_env(msh_slice(str, st, ed)));
 		st = ed;
+		if (str[ed] == '\'')
+
+		ed++;
 	}
 	return (slices);
 }
