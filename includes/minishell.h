@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:37:31 by blee              #+#    #+#             */
-/*   Updated: 2019/05/14 16:53:00 by blee             ###   ########.fr       */
+/*   Updated: 2019/06/13 18:39:04 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ char				*msh_get_input(void);
 char				**msh_strsplit(char *str);
 void				msh_free_env(t_env *env);
 void				msh_free_arr(char **arr);
+void				msh_slice_quote(char *str, int *s, int *e, t_env **sli);
+char				*msh_slice(char *str, int sta, int end);
 
 #endif

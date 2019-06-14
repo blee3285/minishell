@@ -6,7 +6,7 @@
 #    By: blee <blee@student.42.us.org>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/18 14:11:04 by blee              #+#    #+#              #
-#    Updated: 2019/05/08 18:54:10 by blee             ###   ########.fr        #
+#    Updated: 2019/06/13 15:47:30 by blee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC_FILES = main.c \
 			msh_init_env.c \
 			msh_edit_env.c \
 			msh_strsplit.c \
+			msh_slice_quote.c \
 			msh_free.c \
 			ft_ls/bt_func.c \
 			ft_ls/bt_func2.c \
