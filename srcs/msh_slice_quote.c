@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 15:28:27 by blee              #+#    #+#             */
-/*   Updated: 2019/06/13 18:39:46 by blee             ###   ########.fr       */
+/*   Updated: 2019/06/25 17:34:02 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	dbl_quote(char *str, int *sta, int *end, t_env **slices)
 	int		i;
 
 	i = *sta;
-	//if (!str[i] || str[i] == '\"')
-	//	return ;
 	i++;
 	*sta = i;
 	while (str[i] && str[i] != '\"')
@@ -64,8 +62,9 @@ void	msh_slice_quote(char *str, int *s, int *e, t_env **sli)
 	int		i;
 
 	i = *s;
-	//if (!str || str[i] != '\'' || str[i] != '\"')
-	//	return ;
+	if (!str || str[i] != '\'')
+		if (str[i] != '\"')
+			return ;
 	if (str[i] == '\'')
 	{
 		i++;
@@ -74,7 +73,6 @@ void	msh_slice_quote(char *str, int *s, int *e, t_env **sli)
 			i++;
 		*e = i;
 		msh_add_env(sli, msh_new_env(msh_slice(str, *s, *e)));
-		ft_printf("AAA\n");
 	}
 	else if (str[i] == '\"')
 		dbl_quote(str, s, e, sli);
