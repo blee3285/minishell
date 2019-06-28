@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 15:28:27 by blee              #+#    #+#             */
-/*   Updated: 2019/06/25 17:34:02 by blee             ###   ########.fr       */
+/*   Updated: 2019/06/27 18:25:28 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ char	*msh_slice(char *str, int sta ,int end)
 	return (out);
 }
 
+void	msh_new_slice(char *str, int st, int ed, t_env **sli)
+{
+	msh_add_env(sli, msh_new_env(msh_slice(str, st, ed)));
+}
+
 void	dbl_quote(char *str, int *sta, int *end, t_env **slices)
 {
 	int		i;
@@ -42,18 +47,18 @@ void	dbl_quote(char *str, int *sta, int *end, t_env **slices)
 		if (str[i] == '$')
 		{
 			if (i > *sta)
-				msh_add_env(slices, msh_new_env(msh_slice(str, *sta, i)));
+				msh_new_slice(str, *sta, i, slices);
 			*sta = i;
 			while (str[i] && str[i] != ' ' && str[i] != '\"')
 				i++;
-			msh_add_env(slices, msh_new_env(msh_slice(str, *sta, i)));
+			msh_new_slice(str, *sta, i, slices);
 			*sta = i;
 			i--;
 		}
 		i++;
 	}
 	if (*sta != i)
-		msh_add_env(slices, msh_new_env(msh_slice(str, *sta, i)));
+		msh_new_slice(str, *sta, i, slices);
 	*end = i;
 }
 
@@ -72,7 +77,7 @@ void	msh_slice_quote(char *str, int *s, int *e, t_env **sli)
 		while (str[i] && str[i] != '\'')
 			i++;
 		*e = i;
-		msh_add_env(sli, msh_new_env(msh_slice(str, *s, *e)));
+		msh_new_slice(str, *s, *e, sli);
 	}
 	else if (str[i] == '\"')
 		dbl_quote(str, s, e, sli);

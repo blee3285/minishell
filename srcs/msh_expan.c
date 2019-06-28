@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/06/25 17:55:25 by blee             ###   ########.fr       */
+/*   Updated: 2019/06/27 18:34:11 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,21 @@ int		sub_other(char *str, t_msh *msh, int a)
 }
 */
 
-char	*msh_slice(char *str, int sta, int end)
+int		check_quote(char *str, int idx)
 {
-	char	*out;
-	int		len;
-	int		i;
+	char	quote;
 
-	i = 0;
-	len = end - sta;
-	out = ft_strnew(len);
-	while(sta < end)
+	if (str[idx] != '\'' || str[idx] != '\"')
+		return (0);
+	quote = str[idx];
+	idx++;
+	while (str[idx])
 	{
-		out[i] = str[sta];
-		i++;	
-		sta++;
+		if (str[idx] == quote)
+			return (1);
+		idx++;
 	}
-	return(out);
+	return (-1);
 }
 
 t_env	*get_slice(char *str, t_msh *msh)
@@ -65,20 +64,14 @@ t_env	*get_slice(char *str, t_msh *msh)
 	ed = 0;
 	while (str[ed])
 	{
-		//iterate till you hit a special char (", ', $, ~)
-		//check if / in front of special char, skip if found
-		//for ' skip till end quote
-		//for " check for $, otherwise skip to end quote
-		//if $ found, make a slice of everything before
-		//skip to end of special char (either a space if in a double quote, another $, or end of str) and slice again
-		//repeat still end of str
-		//hanle ~ elsewhere	if (str[ed] == '\'')
 		while (find_match(str[ed], "\"\'$") == 0 && str[ed])
 			ed++;
-		msh_add_env(&slices, msh_new_env(msh_slice(str, st, ed)));
+		if (st < ed)
+			msh_new_slice(str, st, ed, &slices);
 		st = ed;
-		if (str[ed] == '\'')
-
+		//add functions here to handle quotes or $
+		//if quotes, call the slice quote function
+		//if $, check if the expansion is found, add exp to slices if found, otherwise add a empty str?
 		ed++;
 	}
 	return (slices);
@@ -89,6 +82,7 @@ int		msh_expan(char **av, t_msh *msh)
 	int		i;
 
 	i = 0;
+	//check for quote pairs here?
 	while (av[i])
 	{
 		sub_exp(av, msh, i);
