@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/06/27 18:34:11 by blee             ###   ########.fr       */
+/*   Updated: 2019/07/03 18:33:28 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,18 @@ t_env	*get_slice(char *str, t_msh *msh)
 	ed = 0;
 	while (str[ed])
 	{
-		while (find_match(str[ed], "\"\'$") == 0 && str[ed])
-			ed++;
-		if (st < ed)
-			msh_new_slice(str, st, ed, &slices);
-		st = ed;
-		//add functions here to handle quotes or $
-		//if quotes, call the slice quote function
-		//if $, check if the expansion is found, add exp to slices if found, otherwise add a empty str?
+		if (find_match(str[ed], "\"\'$"))
+		{
+			if (st < ed)
+				msh_new_slice(str, st, ed, &slices);
+			st = ed;
+			if (str[ed] == '$')
+			{
+				msh_slice_ex(str, &st, &ed, &slices);
+			}
+			else if (find_match(str[ed], "\'\""))
+				msh_slice_quote(str, &st, &ed, &slices);
+		}
 		ed++;
 	}
 	return (slices);
@@ -80,11 +84,17 @@ t_env	*get_slice(char *str, t_msh *msh)
 int		msh_expan(char **av, t_msh *msh)
 {
 	int		i;
+	int		temp;
 
 	i = 0;
-	//check for quote pairs here?
 	while (av[i])
 	{
+		temp = 0;
+		while (av[i][temp])
+		{
+			if (find_match())
+			temp++;
+		}
 		sub_exp(av, msh, i);
 		i++;
 	}
