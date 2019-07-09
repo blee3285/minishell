@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/07/03 18:33:28 by blee             ###   ########.fr       */
+/*   Updated: 2019/07/08 19:04:03 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		check_quote(char *str, int idx)
 	return (-1);
 }
 
-t_env	*get_slice(char *str, t_msh *msh)
+t_env	*get_slice(char *str)
 {
 	t_env	*slices;
 	int		st;
@@ -79,6 +79,30 @@ t_env	*get_slice(char *str, t_msh *msh)
 		ed++;
 	}
 	return (slices);
+}
+
+char    *sub_slice(t_env *slices, t_msh *msh)
+{
+    t_env   *temp;
+    t_env   *t_str;
+    char    *out;
+
+    temp = slices;
+    t_str = NULL;
+    while (temp)
+    {
+        t_str = temp->str;
+        if (t_str[0] == '$')
+        {
+            t_str = msh_get_value(t_str, msh->env);
+            free(temp->str);
+            temp->str = t_str;
+        }
+        temp = temp->next;
+    }
+    out = msh_env_join(slices);
+    msh_free_env(slices);
+    return (out);
 }
 
 int		msh_expan(char **av, t_msh *msh)

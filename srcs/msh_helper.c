@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 15:43:28 by blee              #+#    #+#             */
-/*   Updated: 2019/04/01 18:18:52 by blee             ###   ########.fr       */
+/*   Updated: 2019/07/08 18:40:24 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,24 @@ char	**msh_env_arr(t_env *env)
 		temp = temp->next;
 	}
 	return (env_arr);
+}
+
+char    *msh_env_join(t_env *env)
+{
+    t_env   *temp;
+    char    *out;
+    char    *t_str;
+
+    out = ft_strnew(1);
+    temp = env;
+    while (temp)
+    {
+        t_str = out;
+        out = ft_strjoin(out, temp->str);
+        free(t_str);
+        temp = temp->next;
+    }
+    return (out);
 }
 
 char	*msh_get_value(char *name, t_env *env)
