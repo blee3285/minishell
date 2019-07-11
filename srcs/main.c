@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:36:33 by blee              #+#    #+#             */
-/*   Updated: 2019/06/13 18:41:16 by blee             ###   ########.fr       */
+/*   Updated: 2019/07/10 17:53:19 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,26 +104,16 @@ int		main(void)
 	extern char	**environ;
 	int			cmd;
 	t_msh		*msh;
-	char		test[] = "\"test\\$home\\test\"";
 	t_env		*lst;
-	int			a;
-	int			b;
 
 	msh = new_msh(environ);
-	a = 0;
-	b = 0;
 	lst = NULL;
-	msh_slice_quote(test, &a, &b, &lst);
-	print_env(lst);
-	ft_putnbr(a);
-	ft_putchar(' ');
-	ft_putnbr(b);
-	ft_putchar('\n');
 	while(1)
 	{
 		ft_putstr("$>");
 		str = msh_get_input();
 		av = msh_strsplit(str);
+        msh_expan(av, msh);
 		//ft_printf("Input: |%s|\n", av[0]);
 		cmd = msh_cmd_id(av);
 		if (cmd == -1)

@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:37:31 by blee              #+#    #+#             */
-/*   Updated: 2019/06/27 18:25:33 by blee             ###   ########.fr       */
+/*   Updated: 2019/07/10 18:07:16 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void				msh_exec(char **av, t_env *envi);
 char				**msh_env_arr(t_env *env);
 char				*msh_get_value(char *name, t_env *env);
 char				*msh_get_name(char *str);
+char                *msh_env_join(t_env *env);
 
 t_env				*msh_init_env(char **environ);
 int					msh_add_env(t_env **dst, t_env *new);
@@ -55,5 +56,7 @@ void				msh_free_arr(char **arr);
 void				msh_slice_quote(char *str, int *s, int *e, t_env **sli);
 char				*msh_slice(char *str, int sta, int end);
 void				msh_new_slice(char *str, int st, int ed, t_env **sli);
+
+int                 msh_expan(char **av, t_msh *msh);
 
 #endif

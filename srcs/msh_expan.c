@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/07/08 19:04:03 by blee             ###   ########.fr       */
+/*   Updated: 2019/07/10 19:13:01 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_env	*get_slice(char *str)
 
 	st = 0;
 	ed = 0;
+    slices = NULL;
 	while (str[ed])
 	{
 		if (find_match(str[ed], "\"\'$"))
@@ -70,9 +71,7 @@ t_env	*get_slice(char *str)
 				msh_new_slice(str, st, ed, &slices);
 			st = ed;
 			if (str[ed] == '$')
-			{
-				msh_slice_ex(str, &st, &ed, &slices);
-			}
+				msh_new_slice(str, st, ed, &slices);
 			else if (find_match(str[ed], "\'\""))
 				msh_slice_quote(str, &st, &ed, &slices);
 		}
@@ -84,7 +83,7 @@ t_env	*get_slice(char *str)
 char    *sub_slice(t_env *slices, t_msh *msh)
 {
     t_env   *temp;
-    t_env   *t_str;
+    char   *t_str;
     char    *out;
 
     temp = slices;
@@ -107,6 +106,14 @@ char    *sub_slice(t_env *slices, t_msh *msh)
 
 int		msh_expan(char **av, t_msh *msh)
 {
+    char    **hold1;
+    t_msh   *hold2;
+    t_env   *test_arr;
+
+    hold1 = av;
+    hold2 = msh;
+    test_arr = get_slice(av[0]);
+    /*
 	int		i;
 	int		temp;
 
@@ -122,6 +129,8 @@ int		msh_expan(char **av, t_msh *msh)
 		sub_exp(av, msh, i);
 		i++;
 	}
+    */
+    return (0);
 }
 
 /*
