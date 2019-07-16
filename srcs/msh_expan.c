@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/07/10 19:13:01 by blee             ###   ########.fr       */
+/*   Updated: 2019/07/15 18:45:23 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,15 @@ t_env	*get_slice(char *str)
 		}
 		ed++;
 	}
+    if (st != ed)
+        msh_new_slice(str, st, ed, &slices);
 	return (slices);
 }
 
 char    *sub_slice(t_env *slices, t_msh *msh)
 {
     t_env   *temp;
-    char   *t_str;
+    char    *t_str;
     char    *out;
 
     temp = slices;
@@ -113,6 +115,12 @@ int		msh_expan(char **av, t_msh *msh)
     hold1 = av;
     hold2 = msh;
     test_arr = get_slice(av[0]);
+    while (test_arr)
+    {
+        ft_printf("Reading slice:\n");
+        ft_printf("%s\n", test_arr->str);
+        test_arr = test_arr->next;
+    }
     /*
 	int		i;
 	int		temp;
