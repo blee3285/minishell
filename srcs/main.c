@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:36:33 by blee              #+#    #+#             */
-/*   Updated: 2019/07/10 17:53:19 by blee             ###   ########.fr       */
+/*   Updated: 2019/07/17 17:48:11 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ char	*msh_slice(char *str, int sta, int end)
 	return (out);
 }
 */
+
 int		main(void)
 {
 	char		*str;
