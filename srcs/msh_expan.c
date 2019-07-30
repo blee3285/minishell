@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 14:58:57 by blee              #+#    #+#             */
-/*   Updated: 2019/07/15 18:45:23 by blee             ###   ########.fr       */
+/*   Updated: 2019/07/29 17:36:58 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_env	*get_slice(char *str)
 				msh_new_slice(str, st, ed, &slices);
 			st = ed;
 			if (str[ed] == '$')
-				msh_new_slice(str, st, ed, &slices);
+				msh_slice_ex(str, &st, &ed, &slices);
 			else if (find_match(str[ed], "\'\""))
 				msh_slice_quote(str, &st, &ed, &slices);
 		}
@@ -109,35 +109,23 @@ char    *sub_slice(t_env *slices, t_msh *msh)
 int		msh_expan(char **av, t_msh *msh)
 {
     char    **hold1;
+    //char    *merge;
     t_msh   *hold2;
     t_env   *test_arr;
 
     hold1 = av;
     hold2 = msh;
     test_arr = get_slice(av[0]);
+    //merge = sub_slice(test_arr, msh);
+    //if (merge)
+    //    ft_printf("%s\n", merge);
+    
     while (test_arr)
     {
         ft_printf("Reading slice:\n");
         ft_printf("%s\n", test_arr->str);
         test_arr = test_arr->next;
     }
-    /*
-	int		i;
-	int		temp;
-
-	i = 0;
-	while (av[i])
-	{
-		temp = 0;
-		while (av[i][temp])
-		{
-			if (find_match())
-			temp++;
-		}
-		sub_exp(av, msh, i);
-		i++;
-	}
-    */
     return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 15:28:27 by blee              #+#    #+#             */
-/*   Updated: 2019/07/03 18:22:03 by blee             ###   ########.fr       */
+/*   Updated: 2019/07/29 17:40:44 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,19 @@ void	dbl_quote(char *str, int *sta, int *end, t_env **slices)
 	*sta = i;
 	while (str[i] && str[i] != '\"')
 	{
+        /*
 		if (str[i] == '$')
 		{
 			if (i > *sta)
 				msh_new_slice(str, *sta, i, slices);
 			*sta = i;
-			while (str[i] && str[i] != ' ' && str[i] != '\"')
+			while (str[i] && str[i] != ' ' && str[i - 1] != '\"')
 				i++;
 			msh_new_slice(str, *sta, i, slices);
 			*sta = i;
 			i--;
 		}
+        */
 		i++;
 	}
 	if (*sta != i)
@@ -74,14 +76,14 @@ void	msh_slice_quote(char *str, int *s, int *e, t_env **sli)
 	{
 		i++;
 		*s = i;
-		while (str[i] && str[i] != '\'')
+		while (str[i] && str[i - 1] != '\'')
 			i++;
 		*e = i;
 		msh_new_slice(str, *s, *e, sli);
 	}
 	else if (str[i] == '\"')
 		dbl_quote(str, s, e, sli);
-	*s = *e;
+	*s = *e + 1;
 }
 
 void	msh_slice_ex(char *str, int *s, int *e, t_env **sli)
@@ -96,5 +98,7 @@ void	msh_slice_ex(char *str, int *s, int *e, t_env **sli)
 		i++;
 	*e = i;
 	msh_new_slice(str, *s, *e, sli);
+    if (str[i] == '\'' || str[i] == '\"')
+        *e = *e + 1; 
 	*s = *e;
 }
