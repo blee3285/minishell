@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:37:31 by blee              #+#    #+#             */
-/*   Updated: 2019/07/29 17:11:48 by blee             ###   ########.fr       */
+/*   Updated: 2019/07/31 17:20:10 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,15 @@ typedef struct		s_cmds
 typedef struct		s_msh
 {
 	t_env			*env;
-	t_env			*input;
+    char            **av;
 	int				cmd_id;
 }					t_msh;
+
+typedef struct      s_slice
+{
+    t_env           *slices;
+    int             quotes; 
+}
 
 int					msh_cmd_id(char **av);
 int					msh_echo(char **av, t_msh *msh);
