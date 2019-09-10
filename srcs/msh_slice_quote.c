@@ -6,12 +6,13 @@
 /*   By: blee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 15:28:27 by blee              #+#    #+#             */
-/*   Updated: 2019/08/12 18:23:16 by blee             ###   ########.fr       */
+/*   Updated: 2019/09/09 18:37:26 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
 char	*msh_slice(char *str, int sta ,int end)
 {
 	char	*out;
@@ -44,19 +45,19 @@ void	dbl_quote(char *str, int *sta, int *end, t_env **slices)
 	*sta = i;
 	while (str[i] && str[i] != '\"')
 	{
-        /*
-		if (str[i] == '$')
-		{
-			if (i > *sta)
-				msh_new_slice(str, *sta, i, slices);
-			*sta = i;
-			while (str[i] && str[i] != ' ' && str[i - 1] != '\"')
-				i++;
-			msh_new_slice(str, *sta, i, slices);
-			*sta = i;
-			i--;
-		}
-        */
+        
+		//if (str[i] == '$')
+		//{
+		//	if (i > *sta)
+		//		msh_new_slice(str, *sta, i, slices);
+		//	*sta = i;
+		//	while (str[i] && str[i] != ' ' && str[i - 1] != '\"')
+		//		i++;
+		//	msh_new_slice(str, *sta, i, slices);
+		//	*sta = i;
+		//	i--;
+		//}
+        
 		i++;
 	}
 	if (*sta != i)
@@ -103,6 +104,20 @@ void	msh_slice_ex(char *str, int *s, int *e, t_env **sli)
 	*s = *e;
 }
 
+char    **msh_slice_quote(char *str)
+{
+    int     i;
+    int     count;
+    char    **slices;
+
+    count = check_quotes(str);
+    if (count == 0)
+        return (NULL);
+    slices = (char**)malloc(sizeof(char*) * (count + 1));
+
+}
+*/
+
 int     check_quotes(char *str)
 {
     int     i;
@@ -129,15 +144,14 @@ int     check_quotes(char *str)
     return (count);
 }
 
-char    **msh_slice_quote(char *str)
+char    *msh_qchr(char *str)
 {
-    int     i;
-    int     count;
-    char    **slices;
+    char    *temp;
 
-    count = check_quotes(str);
-    if (count == 0)
+    temp = ft_strchr(str, '\"');
+    if (!*temp)
+        temp = ft_strchr(str, '\'');
+    if (!*temp)
         return (NULL);
-    slices = (char**)malloc(sizeof(char*) * (count + 1));
-
+    return (temp + 1);
 }
