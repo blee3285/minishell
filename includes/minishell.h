@@ -6,7 +6,7 @@
 /*   By: blee <blee@student.42.us.org>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:37:31 by blee              #+#    #+#             */
-/*   Updated: 2019/08/26 18:12:50 by blee             ###   ########.fr       */
+/*   Updated: 2019/09/09 16:03:24 by blee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct		s_cmds
 {
     int             cmd_id;
 	char			*name;
-    char            *flags;
     char            **args;
     struct s_cmds   *next;
 }					t_cmds;
@@ -56,11 +55,12 @@ char				*msh_get_input(void);
 char				**msh_strsplit(char *str);
 void				msh_free_env(t_env *env);
 void				msh_free_arr(char **arr);
+/*
 void				msh_slice_quote(char *str, int *s, int *e, t_env **sli);
 void                msh_slice_ex(char *str, int *s, int *e, t_env **sli);
 char				*msh_slice(char *str, int sta, int end);
 void				msh_new_slice(char *str, int st, int ed, t_env **sli);
-
+*/
 int                 msh_expan(char **av, t_msh *msh);
 
 #endif
